@@ -1,3 +1,7 @@
+import sys, os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
+
 import streamlit as st
 import os, subprocess, json, tempfile, zipfile, shlex
 from io import StringIO
