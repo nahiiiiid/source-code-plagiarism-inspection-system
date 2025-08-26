@@ -1,0 +1,13 @@
+pandas
+numpy
+scikit-learn
+streamlit
+pytest
+joblib
+transformers
+torch
+sentence-transformers
+tqdm
+astunparse
+black
+python-Levenshtein

@@ -1,0 +1,30 @@
+# Source Code Plagiarism Inspection System (Upgraded)
+
+Cutting-edge plagiarism detection for student source code combining:
+- AST-based normalization (Python-aware) to canonicalize identifiers and structure
+- TF-IDF n-gram features + CodeBERT semantic embeddings fusion
+- Line-level diff highlighting and n-gram overlap explanations
+- Batch scanning CLI to scan a folder of submissions and export CSV reports
+- Streamlit web UI for pairwise checks, batch scanning, and report download
+
+## Quick install (local, TF-IDF only)
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+pip install -e .
+python -m src.dataset --out data/synthetic.csv --n 500
+python -m src.model --data data/synthetic.csv --backend tfidf --out-model models/model_tfidf.pkl --out-vec models/vec_tfidf.pkl
+PYTHONPATH=. streamlit run app/streamlit_app.py
+```
+
+## CodeBERT (recommended)
+- Use Google Colab GPU to run `src.compute_embeddings` (see `src/compute_embeddings.py`), then train with `--backend codebert` and `--emb_dir data`.
+- If you run locally without GPU, expect slow embedding times.
+
+## CLI batch scan example
+```bash
+python -m src.batch_scan --folder submissions/ --out report.csv --threshold 0.75
+```
+
+See `app/` for the Streamlit UI and `src/` for core modules.
